@@ -28,7 +28,7 @@ const BANNER = String.raw`
 
 const COMMANDS = [
   "help", "ls", "stack", "open", "cd", "style", "theme", "sound", "xray", "demo",
-  "book", "whoami", "about", "neofetch", "history", "date", "echo", "clear", "exit", "sudo",
+  "book", "tour", "whoami", "about", "neofetch", "history", "date", "echo", "clear", "exit", "sudo",
 ];
 
 const HELP: [string, string][] = [
@@ -44,6 +44,7 @@ const HELP: [string, string][] = [
   ["sound on|off", "synthesized UI sounds"],
   ["xray on|off", "see how this page is built"],
   ["book", "book a free consult"],
+  ["tour", "guided tour of this page"],
   ["whoami · about · neofetch", "self-explanatory, mostly"],
   ["clear · exit", "tidy up · close (or press Esc / ~)"],
 ];
@@ -231,6 +232,10 @@ export default function Terminal() {
         res.push(out(on ? "X-ray on. Everything outlined is a component." : "X-ray off.", "ok"));
         break;
       }
+      case "tour":
+        setOpen(false);
+        setTimeout(() => window.dispatchEvent(new Event("solostack:tour")), 150);
+        return;
       case "book":
         go("/contact");
         res.push(out("→ /contact — free 30 minutes, no pitch.", "ok"));

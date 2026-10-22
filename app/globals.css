@@ -735,3 +735,61 @@ html.xray [data-x]::before {
 .sc-label b { font-family: var(--display); font-weight: var(--display-weight); font-size: 20px; text-transform: var(--display-case); }
 .sc-label small { font-size: 11px; color: var(--dim); text-align: right; }
 .showcase-note { margin-top: 20px; color: var(--muted); font-size: 14px; }
+
+/* ═══ Guided tour: spotlight + arrow callouts (styled by the active site style) ═══ */
+.tour { position: fixed; inset: 0; z-index: 150; pointer-events: none; }
+.tour-dim, .tour-shade { position: absolute; background: rgba(4, 6, 12, 0.6); animation: tour-fade 0.3s ease; }
+.tour-dim { inset: 0; }
+.tour-spot {
+  position: absolute; border-radius: min(var(--radius), 16px);
+  box-shadow: 0 0 0 3px var(--accent), 0 0 30px 4px rgba(var(--accent-rgb), 0.35);
+  animation: tour-fade 0.3s ease;
+}
+.tour-spot::after {
+  content: ""; position: absolute; inset: -3px; border-radius: inherit; border: 3px solid var(--accent);
+  animation: tour-pulse 1.8s ease-out infinite;
+}
+@keyframes tour-pulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.06); opacity: 0; } }
+@keyframes tour-fade { from { opacity: 0; } }
+
+.tour-tip {
+  position: fixed; z-index: 170; pointer-events: auto; width: min(360px, calc(100vw - 24px));
+  padding: 18px 18px 16px; color: var(--text); font-family: var(--body);
+  background: linear-gradient(var(--surface), var(--surface)), var(--bg);
+  border: var(--bw) solid var(--line-2); border-radius: min(var(--radius), 18px);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.55);
+  animation: tour-in 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+html[data-style="brutal"] .tour-tip { box-shadow: 8px 8px 0 #111; }
+@keyframes tour-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+.tour-arrow {
+  position: absolute; width: 16px; height: 16px; margin-left: -8px; transform: rotate(45deg);
+  background: linear-gradient(var(--surface), var(--surface)), var(--bg);
+  border: var(--bw) solid var(--line-2);
+}
+.tour-below .tour-arrow { top: -9px; border-right: 0; border-bottom: 0; }
+.tour-above .tour-arrow { bottom: -9px; border-left: 0; border-top: 0; }
+.tour-head { display: flex; justify-content: space-between; align-items: center; margin: -6px -8px 6px 0; }
+.tour-count { font-family: var(--eyebrow-font); font-size: 11px; letter-spacing: var(--eyebrow-track); text-transform: var(--eyebrow-case); color: var(--eyebrow-color); font-weight: var(--eyebrow-weight); }
+.tour-x { width: 36px; height: 36px; border: 0; background: transparent; color: var(--dim); font-size: 20px; line-height: 1; }
+.tour-x:hover { color: var(--text); }
+.tour-title { margin: 0 0 6px; font-family: var(--display); font-weight: var(--display-weight); text-transform: var(--display-case); letter-spacing: var(--display-track); font-size: 24px; line-height: 1.05; }
+.tour-body { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted); }
+.tour-try {
+  margin-top: 12px; padding: 8px 12px; min-height: 40px; font: inherit; font-size: 13px; font-weight: 600;
+  background: rgba(var(--accent-rgb), 0.12); color: var(--accent-ink); border: 1px solid rgba(var(--accent-rgb), 0.45);
+  border-radius: var(--radius-btn);
+}
+.tour-try:hover { background: rgba(var(--accent-rgb), 0.22); }
+.tour-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
+.tour-dots { display: flex; gap: 5px; flex-wrap: wrap; }
+.tour-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line-2); }
+.tour-dots i.on { background: var(--accent); }
+.tour-btns { display: flex; gap: 8px; margin-left: auto; }
+.help-btn { font-family: var(--display); font-weight: var(--display-weight); font-size: 17px; }
+
+/* the terminal, x-ray HUD and style toast sit above the tour's dimmer so "Show me" actions are visible */
+.term, .xray-hud { z-index: 160; }
+.style-toast { z-index: 165; }
+@media (max-width: 400px) { .nav-tools [data-tour="sound"] { display: none; } }
+@media (prefers-reduced-motion: reduce) { .tour-spot { transition: none; } .tour-spot::after { display: none; } }

@@ -47,6 +47,7 @@ import Footer from "@/components/Footer";
 import Terminal from "@/components/Terminal";
 import XrayHud from "@/components/XrayHud";
 import StyleToast from "@/components/StyleToast";
+import Tour from "@/components/Tour";
 import { SITE } from "@/lib/site";
 import { THEME_BOOT_SCRIPT } from "@/lib/themeBoot";
 
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Terminal />
         <XrayHud />
         <StyleToast />
+        <Tour />
       </body>
     </html>
   );

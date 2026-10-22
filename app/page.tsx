@@ -240,7 +240,7 @@ export default function Home() {
               <Link href="/stack" className="btn btn-primary">
                 ▤ Build your stack
               </Link>
-              <Link href="/demo/helpdesk" className="btn btn-ghost">
+              <Link data-tour="helpdesk-link" href="/demo/helpdesk" className="btn btn-ghost">
                 Try the helpdesk →
               </Link>
             </div>

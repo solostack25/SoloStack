@@ -30,6 +30,7 @@ Next.js rebuild of solostack.us. Dark / neon-teal theme, Rajdhani + Inter + JetB
 | Helpdesk playground | `/demo/helpdesk` · `components/HelpdeskBoard.tsx` | pointer drag & drop (mouse/touch), ← → keyboard moves, quest-mode points, simulated live tickets |
 | Five site styles | half-moon icon · home "One site. Five looks." · `style <name>` in terminal | Stack, Editorial, Glass, Brutal, Playful — see below |
 | Sound design | nav speaker · `lib/sound.ts` | Web Audio synthesized (no files), off by default |
+| Guided tour | auto on first visit · `?` in nav · `tour` in terminal · `components/Tour.tsx` | Spotlight + arrow callouts per page (home, /stack, /demo/helpdesk) with "Show me" actions; shown once per page per browser |
 
 To label a new component for X-ray, add `data-x="Name · detail"` to its root element.
 

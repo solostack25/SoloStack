@@ -47,6 +47,7 @@ export default function NavControls() {
         <button
           ref={trigger}
           className="tool-btn"
+          data-tour="style"
           aria-haspopup="true"
           aria-expanded={open}
           aria-label={`Site style: ${current.name}. Change style`}
@@ -92,6 +93,7 @@ export default function NavControls() {
 
       <button
         className="tool-btn"
+        data-tour="sound"
         aria-pressed={prefs.sound}
         aria-label={prefs.sound ? "Sound on. Turn sound off" : "Sound off. Turn sound on"}
         title="Sound"
@@ -112,6 +114,7 @@ export default function NavControls() {
 
       <button
         className="tool-btn xray-btn"
+        data-tour="xray"
         aria-pressed={prefs.xray}
         aria-label={prefs.xray ? "X-ray on. Turn off" : "X-ray: see how this page is built"}
         title="X-ray"
@@ -128,6 +131,7 @@ export default function NavControls() {
 
       <button
         className="tool-btn mono"
+        data-tour="terminal"
         aria-label="Open terminal (press ~)"
         title="Terminal (~)"
         onClick={() => {
@@ -136,6 +140,19 @@ export default function NavControls() {
         }}
       >
         &gt;_
+      </button>
+
+      <button
+        className="tool-btn help-btn"
+        data-tour="help"
+        aria-label="Take the guided tour"
+        title="Tour"
+        onClick={() => {
+          click(1.1);
+          window.dispatchEvent(new Event("solostack:tour"));
+        }}
+      >
+        ?
       </button>
     </div>
   );

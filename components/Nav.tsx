@@ -14,7 +14,7 @@ export default function Nav() {
               {n.label}
             </Link>
           ))}
-          <Link href="/stack" className="nav-stack" aria-label="Build your stack">
+          <Link href="/stack" className="nav-stack" data-tour="stack-link" aria-label="Build your stack">
             ▤<span className="hide-sm"> BUILD YOUR STACK</span>
           </Link>
           <NavControls />
