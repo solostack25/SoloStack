@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type MatterNS from "matter-js";
 import { FOUNDATION, categoryById, moduleById } from "@/lib/modules";
+import { thud, whoosh } from "@/lib/sound";
 
 type Matter = typeof MatterNS;
 
@@ -47,6 +48,7 @@ export default function PhysicsTower({ stack, pulledId, onRemove, onDropId }: Pr
   const widthRef = useRef(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const lastThud = useRef(0);
+  const lastSound = useRef(0);
   const flinging = useRef(new Set<string>());
   const stackRef = useRef(stack);
   stackRef.current = stack;
@@ -75,9 +77,14 @@ export default function PhysicsTower({ stack, pulledId, onRemove, onDropId }: Pr
       engine.current = eng;
 
       Matter.Events.on(eng, "collisionStart", (ev) => {
-        // a heavy landing shakes the zone a little
         for (const pair of ev.pairs) {
           const speed = Math.max(pair.bodyA.speed, pair.bodyB.speed);
+          // audible landing (throttled so a settling pile doesn't machine-gun)
+          if (speed > 2.2 && performance.now() - lastSound.current > 70) {
+            lastSound.current = performance.now();
+            thud(speed / 11);
+          }
+          // a heavy landing shakes the zone a little
           if (speed > 6 && performance.now() - lastThud.current > 180) {
             lastThud.current = performance.now();
             const z = zoneRef.current;
@@ -215,9 +222,11 @@ export default function PhysicsTower({ stack, pulledId, onRemove, onDropId }: Pr
       Matter.Sleeping.set(b, false);
       if (id === pulledId) {
         // Jenga pull: slide straight out
+        whoosh();
         Matter.Body.setVelocity(b, { x: 17, y: -1 });
         Matter.Body.setAngularVelocity(b, 0.01);
       } else {
+        if (gone.length < 4 || gone.indexOf(id) === 0) whoosh(true);
         const dir = Math.random() < 0.5 ? -1 : 1;
         Matter.Body.setVelocity(b, { x: dir * (5 + Math.random() * 6), y: -6 - Math.random() * 5 });
         Matter.Body.setAngularVelocity(b, dir * (0.08 + Math.random() * 0.12));
@@ -276,6 +285,7 @@ export default function PhysicsTower({ stack, pulledId, onRemove, onDropId }: Pr
         if (id) onDropId(id);
       }}
       aria-label="Your stack. Modules stack from the foundation up."
+      data-x="PhysicsTower · matter-js @ 60fps"
     >
       {mode === "static" ? (
         <>

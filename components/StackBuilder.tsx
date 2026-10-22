@@ -13,6 +13,7 @@ import {
   moduleById,
 } from "@/lib/modules";
 import { renderStackImage } from "@/lib/stackImage";
+import { chime, click } from "@/lib/sound";
 import PhysicsTower from "./PhysicsTower";
 
 type Filter = CategoryId | "all";
@@ -91,6 +92,7 @@ export default function StackBuilder() {
 
   const add = useCallback(
     (id: string) => {
+      click(1.1);
       setPulled(null);
       setStack((cur) => {
         if (cur.includes(id)) {
@@ -125,9 +127,29 @@ export default function StackBuilder() {
     [stack, say],
   );
 
+  // The terminal (and anything else) can drive the stack with a window event.
+  useEffect(() => {
+    const onCmd = (e: Event) => {
+      const { action, ids = [] } = (e as CustomEvent<{ action: "add" | "rm" | "set" | "clear"; ids?: string[] }>).detail;
+      if (action === "add") ids.forEach((id) => add(id));
+      if (action === "rm") ids.forEach((id) => stack.includes(id) && remove(id));
+      if (action === "set") {
+        setPulled(null);
+        setStack(resolve(ids));
+      }
+      if (action === "clear") {
+        setPulled(null);
+        setStack([]);
+      }
+    };
+    window.addEventListener("solostack:stack", onCmd);
+    return () => window.removeEventListener("solostack:stack", onCmd);
+  }, [add, remove, stack]);
+
   const loadPreset = (presetId: string) => {
     const preset = PRESETS.find((p) => p.id === presetId);
     if (!preset) return;
+    click(1.2);
     const resolved = resolve(preset.modules);
     setPulled(null);
     setStack(resolved);
@@ -163,6 +185,7 @@ export default function StackBuilder() {
           text: `Our ${stack.length + 1}-block stack. Build yours:`,
           url: window.location.href,
         });
+        chime();
         say("Shared. Nice stack.");
       } else {
         const url = URL.createObjectURL(blob);
@@ -171,6 +194,7 @@ export default function StackBuilder() {
         a.download = "my-solostack.png";
         a.click();
         setTimeout(() => URL.revokeObjectURL(url), 2000);
+        chime();
         say("Saved my-solostack.png — post it anywhere.");
       }
     } catch (err) {
@@ -219,7 +243,7 @@ export default function StackBuilder() {
 
       <div className="container sb">
         {/* ── Library ─────────────────────────────── */}
-        <section aria-labelledby="lib-title">
+        <section aria-labelledby="lib-title" data-x="ModuleLibrary · client component">
           <h2 id="lib-title" className="eyebrow" style={{ marginBottom: 14 }}>
             // Pick your modules — tap Add or drag onto the stack
           </h2>
@@ -282,6 +306,11 @@ export default function StackBuilder() {
                     <button className="lib-info" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? null : m.id)}>
                       {isOpen ? "Less" : "What’s inside"}
                     </button>
+                    {m.id === "helpdesk" && (
+                      <Link href="/demo/helpdesk" className="lib-info" style={{ color: "var(--accent)" }}>
+                        Try it ↗
+                      </Link>
+                    )}
                     <button
                       className="lib-add"
                       onClick={() => add(m.id)}
@@ -298,7 +327,7 @@ export default function StackBuilder() {
         </section>
 
         {/* ── The tower ──────────────────────────── */}
-        <aside className="tower-wrap" aria-labelledby="tower-title">
+        <aside className="tower-wrap" aria-labelledby="tower-title" data-x="StackTower · sticky aside">
           <div className="tower-panel">
             <div className="tower-head">
               <span id="tower-title">your-org — stack</span>
@@ -309,7 +338,7 @@ export default function StackBuilder() {
 
             <PhysicsTower stack={stack} pulledId={pulled} onRemove={remove} onDropId={add} />
 
-            <div className="summary">
+            <div className="summary" data-x="StackSummary · live pricing">
               {mix.length > 0 && (
                 <div className="mix" aria-hidden="true">
                   {mix.map((c) => (
@@ -320,7 +349,15 @@ export default function StackBuilder() {
 
               <div className="bands" role="group" aria-label="Organization size">
                 {BANDS.map((b) => (
-                  <button key={b.id} className="band-btn" aria-pressed={band === b.id} onClick={() => setBand(b.id)}>
+                  <button
+                    key={b.id}
+                    className="band-btn"
+                    aria-pressed={band === b.id}
+                    onClick={() => {
+                      click(0.9);
+                      setBand(b.id);
+                    }}
+                  >
                     <strong>{b.label}</strong>
                     <span>{b.staff}</span>
                   </button>

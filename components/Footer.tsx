@@ -3,7 +3,7 @@ import { SITE } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" data-x="Footer">
       <div className="container footer-grid">
         <div className="footer-col">
           <span className="logo-word" style={{ color: "var(--text)" }}>

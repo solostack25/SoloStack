@@ -69,7 +69,7 @@ export default function ContactForm() {
         </div>
       )}
 
-      <form className="form" onSubmit={submit} style={{ marginTop: stack.length ? 0 : 36 }}>
+      <form className="form" data-x="ContactForm · prefilled mailto" onSubmit={submit} style={{ marginTop: stack.length ? 0 : 36 }}>
         <div className="row-2">
           <div className="field">
             <label htmlFor="name">Your name</label>

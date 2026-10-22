@@ -16,7 +16,7 @@ const ITEMS = [
 export default function Marquee() {
   const line = ITEMS.join(" /// ") + " /// ";
   return (
-    <div className="marquee" aria-hidden="true">
+    <div className="marquee" aria-hidden="true" data-x="Marquee · pure CSS animation">
       <div className="marquee-track">
         <span>{line}</span>
         <span>{line}</span>

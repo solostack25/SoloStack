@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Marquee from "@/components/Marquee";
+import ChaosToPortal from "@/components/ChaosToPortal";
 import { CATEGORIES, MODULES, categoryById } from "@/lib/modules";
 
 const ORGS = [
@@ -100,7 +101,7 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="container hero" style={{ padding: "96px 24px 80px" }}>
+      <section className="container hero" style={{ padding: "96px 24px 80px" }} data-x="Hero · server component">
         <div className="hero-copy">
           <p className="eyebrow">// Managed IT + custom platforms · Houston, TX</p>
           <h1 className="h1">
@@ -124,7 +125,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="console" role="img" aria-label="The SoloStack Command Center showing client deployments">
+        <div className="console" data-x="CommandCenter · console" role="img" aria-label="The SoloStack Command Center showing client deployments">
           <div className="console-head">
             <span>solostack — command center</span>
             <span className="live">live</span>
@@ -146,8 +147,10 @@ export default function Home() {
 
       <Marquee />
 
+      <ChaosToPortal />
+
       {/* SERVICES */}
-      <section id="services" className="container section">
+      <section id="services" className="container section" data-x="Services · CSS grid">
         <div className="section-head">
           <div>
             <p className="eyebrow">// What we do</p>
@@ -183,7 +186,7 @@ export default function Home() {
       </section>
 
       {/* WORK */}
-      <section id="work" className="container section">
+      <section id="work" className="container section" data-x="WorkGrid · auto-fit grid">
         <p className="eyebrow">// Shipped, not pitched</p>
         <h2 className="h2" style={{ marginBottom: 48 }}>
           Built for orgs
@@ -212,7 +215,7 @@ export default function Home() {
       </section>
 
       {/* NONPROFIT OS */}
-      <section id="platform" className="band">
+      <section id="platform" className="band" data-x="NonprofitOS · data from lib/modules.ts">
         <div className="container platform">
           <div className="platform-copy">
             <p className="eyebrow">// Nonprofit OS</p>
@@ -230,9 +233,14 @@ export default function Home() {
             <p style={{ fontFamily: "var(--mono)", fontSize: 13, color: "var(--text-2)" }}>
               Your Supabase. Your GitHub. Your data.
             </p>
-            <Link href="/stack" className="btn btn-primary" style={{ marginTop: 12 }}>
-              ▤ Build your stack
-            </Link>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 12 }}>
+              <Link href="/stack" className="btn btn-primary">
+                ▤ Build your stack
+              </Link>
+              <Link href="/demo/helpdesk" className="btn btn-ghost">
+                Try the helpdesk →
+              </Link>
+            </div>
           </div>
           <div className="platform-grid">
             {featured.map((m) => (
@@ -254,7 +262,7 @@ export default function Home() {
       </section>
 
       {/* WHY */}
-      <section id="about" className="container section">
+      <section id="about" className="container section" data-x="WhySoloStack">
         <p className="eyebrow">// Why SoloStack</p>
         <h2 className="h2" style={{ marginBottom: 48 }}>
           Built by someone
@@ -275,7 +283,7 @@ export default function Home() {
       {/* PROCESS */}
       <section className="container section">
         <p className="eyebrow">// How it works</p>
-        <div className="joined-grid cols-4" style={{ marginTop: 24 }}>
+        <div className="joined-grid cols-4" style={{ marginTop: 24 }} data-x="Process · 4-step grid">
           {STEPS.map((s, i) => (
             <div className="step" key={s.title}>
               <span className="num">STEP 0{i + 1}</span>
@@ -288,7 +296,7 @@ export default function Home() {
 
       {/* CTA */}
       <section className="container" style={{ marginTop: 96 }}>
-        <div className="cta">
+        <div className="cta" data-x="CallToAction">
           <div>
             <p className="eyebrow">// Ready to stack up?</p>
             <h2 className="h2" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>
