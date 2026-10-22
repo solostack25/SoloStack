@@ -1,12 +1,25 @@
 import type { Metadata } from "next";
 import StackBuilder from "@/components/StackBuilder";
-import { MODULES } from "@/lib/modules";
+import { MODULES, moduleById } from "@/lib/modules";
 
-export const metadata: Metadata = {
-  title: "Build Your Stack",
-  description:
-    "Stack the Nonprofit OS modules your organization needs — helpdesk, donor CRM, finance approvals, client intake and more — on a foundation you own.",
-};
+type Search = Promise<{ s?: string; b?: string }>;
+
+export async function generateMetadata({ searchParams }: { searchParams: Search }): Promise<Metadata> {
+  const { s = "", b = "M" } = await searchParams;
+  const ids = s.split(",").filter((id) => moduleById(id));
+  const shared = ids.length > 0;
+  const og = `/api/og?s=${encodeURIComponent(ids.join(","))}&b=${encodeURIComponent(b)}`;
+  const title = shared ? `Our ${ids.length + 1}-block SoloStack` : "Build Your Stack";
+  const description = shared
+    ? `${ids.map((id) => moduleById(id)!.name).join(" · ")} — stacked on the SoloStack Core Platform. Build yours.`
+    : "Stack the Nonprofit OS modules your organization needs — helpdesk, donor CRM, finance approvals, client intake and more — on a foundation you own.";
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: [{ url: og, width: 1200, height: 630 }] },
+    twitter: { card: "summary_large_image", title, description, images: [og] },
+  };
+}
 
 export default function StackPage() {
   return (

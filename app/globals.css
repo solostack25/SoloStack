@@ -344,6 +344,16 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .mix { display: flex; height: 8px; gap: 2px; }
 .mix span { background: var(--c); transition: flex-grow 0.3s ease; }
 
+/* physics tower */
+.phys-zone { display: block; overflow: hidden; padding: 0; }
+.phys-zone.static { display: flex; padding: 24px 28px 20px; overflow: visible; }
+.block.phys { position: absolute; top: 0; left: 0; animation: none; will-change: transform; transform-origin: 50% 50%; }
+.block.phys.foundation { will-change: auto; }
+.block.leaving { pointer-events: none; }
+.tower-wrap .tower-zone.shake { animation: shake 0.3s ease; }
+.share-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; transform: none; }
+
 /* ── Contact ─────────────────────────────────────── */
 .contact { max-width: 760px; padding: 80px 24px 0; }
 .stack-receipt { border: 1px solid var(--line); background: var(--surface); padding: 20px; margin: 28px 0; }
