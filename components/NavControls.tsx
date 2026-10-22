@@ -1,15 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { THEMES, type ThemeId, getPrefs, setPrefs, usePrefs } from "@/lib/prefs";
+import { getPrefs, setPrefs, usePrefs } from "@/lib/prefs";
+import { STYLES } from "@/lib/styles";
+import { switchStyle, originOf } from "@/lib/switchStyle";
 import { chime, click, unlock } from "@/lib/sound";
-
-export function changeTheme(id: ThemeId) {
-  const html = document.documentElement;
-  html.classList.add("theme-anim");
-  setPrefs({ theme: id });
-  window.setTimeout(() => html.classList.remove("theme-anim"), 500);
-}
 
 export function toggleSound(on?: boolean) {
   const next = on ?? !getPrefs().sound;
@@ -28,6 +23,7 @@ export default function NavControls() {
   const prefs = usePrefs();
   const [open, setOpen] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -43,41 +39,51 @@ export default function NavControls() {
     };
   }, [open]);
 
-  const current = THEMES.find((t) => t.id === prefs.theme) ?? THEMES[0];
+  const current = STYLES.find((s) => s.id === prefs.style) ?? STYLES[0];
 
   return (
     <div className="nav-tools">
       <div className="theme-pick" ref={wrap}>
         <button
+          ref={trigger}
           className="tool-btn"
           aria-haspopup="true"
           aria-expanded={open}
-          aria-label={`Theme: ${current.name}. Change theme`}
-          title="Theme"
+          aria-label={`Site style: ${current.name}. Change style`}
+          title="Switch style"
           onClick={() => {
             click();
             setOpen((o) => !o);
           }}
         >
-          <span className="swatch" style={{ background: current.swatch }} />
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <circle cx="12" cy="12" r="8.5" />
+            <path d="M12 3.5a8.5 8.5 0 0 0 0 17z" fill="currentColor" stroke="none" />
+          </svg>
         </button>
         {open && (
-          <div className="theme-menu" role="menu">
-            <p className="theme-menu-label">ONE CODEBASE. ANY BRAND.</p>
-            {THEMES.map((t) => (
+          <div className="theme-menu style-menu" role="menu" aria-label="Site styles">
+            <p className="theme-menu-label">ONE CODEBASE · FIVE DESIGN LANGUAGES</p>
+            {STYLES.map((s) => (
               <button
-                key={t.id}
+                key={s.id}
                 role="menuitemradio"
-                aria-checked={t.id === prefs.theme}
-                className="theme-opt"
-                onClick={() => {
+                aria-checked={s.id === prefs.style}
+                className="theme-opt style-opt"
+                onClick={(e) => {
                   click(1.2);
-                  changeTheme(t.id);
                   setOpen(false);
+                  void switchStyle(s.id, originOf(e.currentTarget) ?? originOf(trigger.current));
                 }}
               >
-                <span className="swatch" style={{ background: t.swatch }} />
-                {t.name}
+                {/* each preview chip renders in its own style's tokens */}
+                <span className="style-chip" data-style={s.id} aria-hidden="true">
+                  Aa
+                </span>
+                <span className="style-opt-text">
+                  <b>{s.name}</b>
+                  <small>{s.tagline}</small>
+                </span>
               </button>
             ))}
           </div>

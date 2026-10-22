@@ -50,7 +50,7 @@ export default function ContactForm() {
       {stack.length > 0 && (
         <div className="stack-receipt">
           <p className="eyebrow" style={{ margin: 0 }}>
-            // Your stack · {BANDS.find((b) => b.id === band)?.label} org · {stack.length + 1} blocks
+            Your stack · {BANDS.find((b) => b.id === band)?.label} org · {stack.length + 1} blocks
           </p>
           <ul>
             <li style={{ ["--c" as string]: "var(--text)" }}>{FOUNDATION.name}</li>

@@ -1,0 +1,111 @@
+/* ═══ PLAYFUL — round, bright, a little bouncy. For masjids, youth programs, communities. ═══ */
+[data-style="playful"] {
+  --bg: #fff7ee; --bg-2: #fdeedd; --surface: #ffffff; --surface-2: #fff3e6;
+  --line: #f0dcc6; --line-2: #e3c6a4; --line-3: #f6e6d5;
+  --text: #2a2141; --text-2: #3a3056; --text-3: #483f64;
+  --muted: #5a5175; --muted-2: #5f5779; --dim: #675f82; --dim-2: #6f688a; --faint: #847d9c;
+  --ghost: #9d96b2; --ghost-2: #aea8c0;
+  --accent: #6c4cf1; --accent-hi: #7c60ff; --on-accent: #ffffff;
+  --accent-rgb: 108, 76, 241; --bg-rgb: 255, 247, 238;
+  --accent-ink: #5838d8; --accent-ink-hi: #4326c0; --accent-bright: #b9aaff;
+  --accent-2: #e2502f;
+  --abyss: #dcc4a6; --stripe-a: #fff0df; --stripe-b: #ffe6cc;
+  --page-bg:
+    radial-gradient(42% 34% at 0% 0%, #ffe1d1 0, transparent 70%),
+    radial-gradient(36% 30% at 100% 12%, #e5ddff 0, transparent 70%),
+    radial-gradient(40% 34% at 92% 100%, #d3f4e8 0, transparent 70%),
+    #fff7ee;
+  --nav-bg: rgba(255, 247, 238, 0.9);
+  --quest: #5838d8;
+  --ink: 40%; --ink-base: #2a2141;
+
+  --display: "Fredoka", "Nunito", system-ui, sans-serif;
+  --body: "Nunito", system-ui, sans-serif;
+  --mono: "Nunito", system-ui, sans-serif;
+  --display-weight: 600; --display-case: none; --display-track: -0.01em; --display-lh: 1; --h-scale: 0.96;
+  --eyebrow-prefix: ""; --eyebrow-size: 13px; --eyebrow-weight: 800; --eyebrow-track: 0.01em; --eyebrow-case: none;
+  --eyebrow-color: #2a2141; --eyebrow-bg: #ffd166; --eyebrow-pad: 6px 14px; --eyebrow-radius: 999px;
+  --logo-case: none; --num-suffix: "";
+  --marquee-sep: "   ●   "; --marquee-font: var(--display); --marquee-size: 20px; --marquee-case: none;
+  --marquee-track: 0; --marquee-bg: #6c4cf1; --marquee-color: #ffffff; --marquee-weight: 600;
+
+  --radius: 28px; --radius-sm: 16px; --radius-btn: 999px; --radius-block: 16px;
+  --bw: 2px; --bw-in: 2px;
+  --shadow-card: 0 6px 0 #f0dcc6; --shadow-card-hover: 0 10px 0 #e3c6a4; --card-lift: translateY(-5px) rotate(-0.6deg);
+
+  --btn-font: var(--display); --btn-size: 16px; --btn-weight: 600; --btn-track: 0.01em; --btn-case: none; --btn-bw: 0px;
+  --btn-shadow: 0 5px 0 #4326c0; --btn-shadow-hover: 0 8px 0 #4326c0;
+  --btn-hover: translateY(-3px); --btn-active: translateY(3px);
+}
+
+/* springy motion everywhere */
+html[data-style="playful"] :is(.btn, .work-card, .mod-card, .lib-card, .chip, .preset-btn, .tool-btn, .why, .joined-grid > *) {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.2s ease;
+}
+html[data-style="playful"] .btn:active { box-shadow: 0 1px 0 #4326c0; }
+html[data-style="playful"] .btn-ghost { background: #fff; border: 2px solid var(--line-2); box-shadow: 0 4px 0 var(--line-2); color: var(--text); }
+html[data-style="playful"] .btn-ghost:hover { transform: translateY(-3px); color: var(--accent-ink); border-color: var(--accent); }
+
+html[data-style="playful"] .h1 .accent, html[data-style="playful"] .sb-hero .h1 span, .style-card[data-style="playful"] .sc-title em {
+  color: var(--accent-2); font-style: normal;
+  text-decoration: underline wavy #ffd166; text-decoration-thickness: 0.08em; text-underline-offset: 0.16em;
+}
+html[data-style="playful"] .logo-mark { border: 0; border-radius: 50%; background: var(--accent); color: #fff; box-shadow: 0 3px 0 #4326c0; }
+html[data-style="playful"] .logo-word .accent { color: var(--accent-2); }
+html[data-style="playful"] .nav-links a:not(.btn) { font-weight: 700; }
+
+/* hero console as a tilted, friendly card */
+html[data-style="playful"] .console { transform: rotate(2deg); border: 2px solid var(--line); box-shadow: 0 10px 0 #f0dcc6; }
+html[data-style="playful"] .console:hover { transform: rotate(0deg) scale(1.01); }
+html[data-style="playful"] .console { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+html[data-style="playful"] .console-head { background: #fff3e6; font-weight: 800; }
+html[data-style="playful"] .console-row > div > span:first-child { font-weight: 700; }
+html[data-style="playful"] .console-ok { background: #d3f4e8; color: #1c6b52; padding: 3px 10px; border-radius: 999px; font-weight: 800; }
+html[data-style="playful"] .marquee { border: 0; }
+
+/* candy-coloured service and why cards */
+html[data-style="playful"] .joined-grid { gap: 18px; background: transparent; border: 0; box-shadow: none; overflow: visible; }
+html[data-style="playful"] .joined-grid > * { border-radius: var(--radius); border: 2px solid var(--line); box-shadow: var(--shadow-card); }
+html[data-style="playful"] .joined-grid > *:hover { transform: translateY(-5px) rotate(-0.8deg); }
+html[data-style="playful"] .cols-3 > :nth-child(1) { background: #ffe9dc; }
+html[data-style="playful"] .cols-3 > :nth-child(2) { background: #ece6ff; }
+html[data-style="playful"] .cols-3 > :nth-child(3) { background: #dcf6ec; }
+html[data-style="playful"] .service .num, html[data-style="playful"] .step .num {
+  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%;
+  background: var(--accent); color: #fff; font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: 0;
+}
+html[data-style="playful"] .step .num { width: auto; padding: 0 14px; border-radius: 999px; height: 32px; font-size: 13px; }
+html[data-style="playful"] .why { border-top: 0; background: #fff; border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow-card); border: 2px solid var(--line); }
+html[data-style="playful"] .why:hover { transform: translateY(-4px) rotate(0.8deg); }
+html[data-style="playful"] .why .big { color: var(--accent-2); }
+html[data-style="playful"] .work-shot { background: radial-gradient(circle at 30% 40%, #ffd166 0 18%, transparent 19%), radial-gradient(circle at 70% 60%, #b9aaff 0 22%, transparent 23%), #fff3e6; color: var(--muted); font-weight: 700; }
+html[data-style="playful"] .work-kind { color: var(--accent-ink); font-weight: 800; }
+html[data-style="playful"] .tag, html[data-style="playful"] .chip, html[data-style="playful"] .preset-btn { border-radius: 999px; font-weight: 700; }
+html[data-style="playful"] .tag { background: #fff; }
+
+/* rounded purple band + sunny CTA */
+html[data-style="playful"] .band {
+  background: #6c4cf1; border: 0; border-radius: 48px; margin: 96px 16px 0;
+  --text: #ffffff; --text-2: #f1edff; --muted: #e4ddff; --eyebrow-bg: #ffd166; --accent-ink: #ffd166;
+  --btn-bg: #ffd166; --btn-bg-hover: #ffdb85; --on-accent: #2a2141; --btn-shadow: 0 5px 0 #c99a1d; --btn-shadow-hover: 0 8px 0 #c99a1d;
+  color: var(--text);
+}
+html[data-style="playful"] .band .mod-card { --text: #2a2141; --muted-2: #5f5779; color: var(--text); border: 0; }
+html[data-style="playful"] .band .btn-ghost { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.5); box-shadow: none; }
+html[data-style="playful"] .cta { background: #ffd166; border: 0; box-shadow: 0 10px 0 #e5b23f; }
+html[data-style="playful"] .cta p { color: #3a3056; }
+html[data-style="playful"] .cta .eyebrow { --eyebrow-bg: #fff; }
+
+/* bubbly blocks */
+html[data-style="playful"] .block::before { display: none; }
+html[data-style="playful"] .block {
+  background: color-mix(in srgb, var(--c) 32%, #fff);
+  border: 0;
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--c) 55%, #6b5a46);
+}
+html[data-style="playful"] .block strong { font-weight: 600; }
+html[data-style="playful"] .block.foundation { box-shadow: 0 6px 0 var(--abyss); }
+html[data-style="playful"] .tower-zone { background-color: #fff3e6; }
+html[data-style="playful"] .hd-card { border-left-width: 6px; }
+html[data-style="playful"] .field input, html[data-style="playful"] .field textarea, html[data-style="playful"] .field select,
+html[data-style="playful"] .hd-new input, html[data-style="playful"] .hd-new select { background: #fff; border-width: 2px; }

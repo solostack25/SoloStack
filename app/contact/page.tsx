@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <section className="container contact">
-      <p className="eyebrow">// Book a free consult</p>
+      <p className="eyebrow">Book a free consult</p>
       <h1 className="h1" style={{ fontSize: "clamp(40px, 5vw, 68px)" }}>
         Let&rsquo;s talk tech.
       </h1>

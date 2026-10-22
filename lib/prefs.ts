@@ -2,23 +2,14 @@
 
 import { useSyncExternalStore } from "react";
 import { PREFS_KEY } from "./themeBoot";
+import { STYLE_IDS, type StyleId } from "./styles";
 
-// Site-wide visitor preferences: theme, sound, x-ray. Persisted per browser,
+// Site-wide visitor preferences: style, sound, x-ray. Persisted per browser,
 // shared across components (nav controls, terminal, stack builder) via a tiny store.
 
-export const THEMES = [
-  { id: "teal", name: "Teal", swatch: "#19e3c4" },
-  { id: "navy", name: "Navy & Gold", swatch: "#f2b33a" },
-  { id: "emerald", name: "Emerald", swatch: "#34d399" },
-  { id: "ember", name: "Ember", swatch: "#ff7a45" },
-] as const;
+export type Prefs = { style: StyleId; sound: boolean; xray: boolean };
 
-export type ThemeId = (typeof THEMES)[number]["id"];
-
-export type Prefs = { theme: ThemeId; sound: boolean; xray: boolean };
-
-const DEFAULTS: Prefs = { theme: "teal", sound: false, xray: false };
-const KEY = PREFS_KEY;
+const DEFAULTS: Prefs = { style: "stack", sound: false, xray: false };
 
 let state: Prefs = DEFAULTS;
 let loaded = false;
@@ -28,11 +19,11 @@ function load() {
   if (loaded || typeof window === "undefined") return;
   loaded = true;
   try {
-    const raw = window.localStorage.getItem(KEY);
+    const raw = window.localStorage.getItem(PREFS_KEY);
     if (raw) {
       const p = JSON.parse(raw) as Partial<Prefs>;
       state = {
-        theme: THEMES.some((t) => t.id === p.theme) ? (p.theme as ThemeId) : DEFAULTS.theme,
+        style: STYLE_IDS.includes(p.style as StyleId) ? (p.style as StyleId) : DEFAULTS.style,
         sound: !!p.sound,
         xray: false, // x-ray never survives a reload; it's a party trick, not a setting
       };
@@ -45,7 +36,7 @@ function load() {
 function apply() {
   if (typeof document === "undefined") return;
   const html = document.documentElement;
-  html.dataset.theme = state.theme;
+  html.dataset.style = state.style;
   html.classList.toggle("xray", state.xray);
 }
 
@@ -58,7 +49,7 @@ export function setPrefs(patch: Partial<Prefs>) {
   load();
   state = { ...state, ...patch };
   try {
-    window.localStorage.setItem(KEY, JSON.stringify({ theme: state.theme, sound: state.sound }));
+    window.localStorage.setItem(PREFS_KEY, JSON.stringify({ style: state.style, sound: state.sound }));
   } catch {
     /* ignore */
   }

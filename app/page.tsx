@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Marquee from "@/components/Marquee";
 import ChaosToPortal from "@/components/ChaosToPortal";
+import StyleShowcase from "@/components/StyleShowcase";
 import { CATEGORIES, MODULES, categoryById } from "@/lib/modules";
 
 const ORGS = [
@@ -103,7 +104,7 @@ export default function Home() {
       {/* HERO */}
       <section className="container hero" style={{ padding: "96px 24px 80px" }} data-x="Hero · server component">
         <div className="hero-copy">
-          <p className="eyebrow">// Managed IT + custom platforms · Houston, TX</p>
+          <p className="eyebrow">Managed IT + custom platforms · Houston, TX</p>
           <h1 className="h1">
             Your IT department.
             <br />
@@ -153,7 +154,7 @@ export default function Home() {
       <section id="services" className="container section" data-x="Services · CSS grid">
         <div className="section-head">
           <div>
-            <p className="eyebrow">// What we do</p>
+            <p className="eyebrow">What we do</p>
             <h2 className="h2">
               Full stack.
               <br />
@@ -168,7 +169,7 @@ export default function Home() {
         <div className="joined-grid cols-3">
           {SERVICES.map((s) => (
             <article className="service" key={s.num}>
-              <span className="num">{s.num} //</span>
+              <span className="num">{s.num}</span>
               <h3 className="h3" style={{ fontSize: 30 }}>
                 {s.title}
               </h3>
@@ -187,7 +188,7 @@ export default function Home() {
 
       {/* WORK */}
       <section id="work" className="container section" data-x="WorkGrid · auto-fit grid">
-        <p className="eyebrow">// Shipped, not pitched</p>
+        <p className="eyebrow">Shipped, not pitched</p>
         <h2 className="h2" style={{ marginBottom: 48 }}>
           Built for orgs
           <br />
@@ -214,11 +215,13 @@ export default function Home() {
         </div>
       </section>
 
+      <StyleShowcase />
+
       {/* NONPROFIT OS */}
       <section id="platform" className="band" data-x="NonprofitOS · data from lib/modules.ts">
         <div className="container platform">
           <div className="platform-copy">
-            <p className="eyebrow">// Nonprofit OS</p>
+            <p className="eyebrow">Nonprofit OS</p>
             <h2 className="h2">
               The staff portal,
               <br />
@@ -263,7 +266,7 @@ export default function Home() {
 
       {/* WHY */}
       <section id="about" className="container section" data-x="WhySoloStack">
-        <p className="eyebrow">// Why SoloStack</p>
+        <p className="eyebrow">Why SoloStack</p>
         <h2 className="h2" style={{ marginBottom: 48 }}>
           Built by someone
           <br />
@@ -282,7 +285,7 @@ export default function Home() {
 
       {/* PROCESS */}
       <section className="container section">
-        <p className="eyebrow">// How it works</p>
+        <p className="eyebrow">How it works</p>
         <div className="joined-grid cols-4" style={{ marginTop: 24 }} data-x="Process · 4-step grid">
           {STEPS.map((s, i) => (
             <div className="step" key={s.title}>
@@ -298,7 +301,7 @@ export default function Home() {
       <section className="container" style={{ marginTop: 96 }}>
         <div className="cta" data-x="CallToAction">
           <div>
-            <p className="eyebrow">// Ready to stack up?</p>
+            <p className="eyebrow">Ready to stack up?</p>
             <h2 className="h2" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>
               Let&rsquo;s build something solid.
             </h2>

@@ -12,7 +12,7 @@ export default function HelpdeskDemoPage() {
   return (
     <>
       <section className="container sb-hero" style={{ paddingBottom: 24 }}>
-        <p className="eyebrow">// Live demo · IT Helpdesk module</p>
+        <p className="eyebrow">Live demo · IT Helpdesk module</p>
         <h1 className="h1" style={{ fontSize: "clamp(40px, 5.5vw, 76px)" }}>
           Go on, <span className="accent">close a ticket.</span>
         </h1>

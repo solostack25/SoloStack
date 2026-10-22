@@ -245,7 +245,7 @@ export default function StackBuilder() {
         {/* ── Library ─────────────────────────────── */}
         <section aria-labelledby="lib-title" data-x="ModuleLibrary · client component">
           <h2 id="lib-title" className="eyebrow" style={{ marginBottom: 14 }}>
-            // Pick your modules — tap Add or drag onto the stack
+            Pick your modules — tap Add or drag onto the stack
           </h2>
           <div className="lib-filters" role="group" aria-label="Filter modules by category">
             <button
@@ -307,7 +307,7 @@ export default function StackBuilder() {
                       {isOpen ? "Less" : "What’s inside"}
                     </button>
                     {m.id === "helpdesk" && (
-                      <Link href="/demo/helpdesk" className="lib-info" style={{ color: "var(--accent)" }}>
+                      <Link href="/demo/helpdesk" className="lib-info" style={{ color: "var(--accent-ink)" }}>
                         Try it ↗
                       </Link>
                     )}

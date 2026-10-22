@@ -254,7 +254,7 @@ export default function ChaosToPortal() {
       <div className="story-sticky">
         <div className="container story-inner">
           <div className="story-copy">
-            <p className="eyebrow">// Scroll to fix it</p>
+            <p className="eyebrow">Scroll to fix it</p>
             <h2 id="story-title" className="h2" aria-live="polite">
               {CAPTIONS[step].text}
             </h2>

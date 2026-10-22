@@ -1,0 +1,100 @@
+/* ═══ EDITORIAL — paper, ink and a confident serif. For foundations & nonprofits. ═══ */
+[data-style="editorial"] {
+  --bg: #f4eee2; --bg-2: #ece4d3; --surface: #fffaf1; --surface-2: #f6efe1;
+  --line: #ddd1bb; --line-2: #c7b89c; --line-3: #e9e0cd;
+  --text: #1d1a15; --text-2: #39332a; --text-3: #4b4439;
+  --muted: #5b5345; --muted-2: #635b4c; --dim: #6b6252; --dim-2: #736a5a; --faint: #857b69;
+  --ghost: #9e927b; --ghost-2: #ae9f86;
+  --accent: #1f5c45; --accent-hi: #184c39; --on-accent: #fffaf1;
+  --accent-rgb: 31, 92, 69; --bg-rgb: 244, 238, 226;
+  --accent-ink: #1f5c45; --accent-ink-hi: #123a2c; --accent-bright: #86d6ae;
+  --accent-2: #9a671b;
+  --abyss: #cbbb9d; --stripe-a: #efe6d3; --stripe-b: #e7dcc6;
+  --page-bg: #f4eee2;
+  --nav-bg: rgba(244, 238, 226, 0.92);
+  --quest: #5b34b0;
+  --ink: 40%; --ink-base: #1d1a15;
+
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "DM Sans", system-ui, sans-serif;
+  --mono: "DM Sans", system-ui, sans-serif;
+  --display-weight: 500; --display-case: none; --display-track: -0.025em; --display-lh: 1.02; --h-scale: 0.96;
+  --eyebrow-prefix: "— "; --eyebrow-size: 12px; --eyebrow-track: 0.18em; --eyebrow-weight: 600;
+  --eyebrow-color: #8a5b13;
+  --logo-case: none; --num-suffix: "";
+  --marquee-sep: "   ·   "; --marquee-font: var(--display); --marquee-size: 24px; --marquee-case: none;
+  --marquee-track: -0.01em; --marquee-bg: #1f5c45; --marquee-color: #f4eee2; --marquee-weight: 400;
+
+  --radius: 18px; --radius-sm: 10px; --radius-btn: 999px; --radius-block: 12px;
+  --shadow-card: 0 1px 2px rgba(60, 45, 20, 0.06), 0 14px 34px -14px rgba(60, 45, 20, 0.2);
+  --shadow-card-hover: 0 2px 4px rgba(60, 45, 20, 0.08), 0 24px 46px -18px rgba(60, 45, 20, 0.32);
+  --card-lift: translateY(-3px);
+
+  --btn-font: var(--body); --btn-size: 15px; --btn-weight: 600; --btn-track: 0; --btn-case: none;
+  --btn-shadow: 0 8px 20px -10px rgba(31, 92, 69, 0.6);
+  --btn-shadow-hover: 0 12px 26px -10px rgba(31, 92, 69, 0.7);
+  --accent-style: italic;
+}
+
+/* type */
+html[data-style="editorial"] .h1 .accent,
+html[data-style="editorial"] .sb-hero .h1 span,
+html[data-style="editorial"] .h2 .accent { font-style: italic; color: var(--accent-2); font-weight: 400; }
+html[data-style="editorial"] .h1 { font-weight: 400; }
+html[data-style="editorial"] .lead { font-size: 20px; line-height: 1.55; }
+html[data-style="editorial"] .marquee-track { font-style: italic; }
+html[data-style="editorial"] .logo-mark { border-radius: 50%; font-style: italic; font-weight: 500; }
+html[data-style="editorial"] .logo-word .accent { color: var(--accent-2); font-style: italic; }
+
+/* newspaper rules above section heads */
+html[data-style="editorial"] .section-head,
+html[data-style="editorial"] #work > .eyebrow,
+html[data-style="editorial"] #about > .eyebrow { border-top: 2px solid var(--text); padding-top: 18px; width: 100%; }
+html[data-style="editorial"] .section-head .eyebrow { border: 0; padding-top: 0; }
+
+/* hero: the console reads as a "current projects" card */
+html[data-style="editorial"] .console { background: var(--surface); border-color: var(--line); }
+html[data-style="editorial"] .console-head { font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 11px; }
+html[data-style="editorial"] .console-row > div > span:first-child { font-family: var(--display); font-size: 17px; }
+html[data-style="editorial"] .console-foot { font-style: italic; }
+
+/* services become separate cards; numerals are big italic serifs */
+html[data-style="editorial"] .joined-grid { gap: 20px; background: transparent; border: 0; box-shadow: none; overflow: visible; }
+html[data-style="editorial"] .joined-grid > * { border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-card); }
+html[data-style="editorial"] .service .num,
+html[data-style="editorial"] .why .big { font-family: var(--display); font-style: italic; font-size: 40px; line-height: 1; color: var(--accent-2); letter-spacing: 0; }
+html[data-style="editorial"] .why { border-top: 1px solid var(--text); }
+html[data-style="editorial"] .work-kind { color: var(--accent-2); font-weight: 600; }
+html[data-style="editorial"] .work-shot { background: repeating-linear-gradient(-45deg, var(--surface-2) 0 14px, var(--bg-2) 14px 28px); font-style: italic; }
+html[data-style="editorial"] .h3 { font-weight: 500; }
+html[data-style="editorial"] .tag, html[data-style="editorial"] .chip, html[data-style="editorial"] .preset-btn { border-radius: 999px; }
+
+/* inverted green bands for the platform section and the CTA */
+html[data-style="editorial"] .band,
+html[data-style="editorial"] .cta {
+  background: #1f5c45; border-color: #1f5c45;
+  --text: #f4eee2; --text-2: #e5ddcd; --muted: #cfe0d5; --muted-2: #cfe0d5;
+  --accent-ink: #e9c98a; --eyebrow-color: #e9c98a; --line-2: rgba(244, 238, 226, 0.4);
+  --btn-bg: #f4eee2; --btn-bg-hover: #ffffff; --on-accent: #1f5c45;
+  color: var(--text);
+}
+html[data-style="editorial"] .band .mod-card {
+  --text: #1d1a15; --muted-2: #635b4c; color: var(--text); border-color: transparent;
+}
+html[data-style="editorial"] .band { border-radius: 0; }
+
+/* stack builder blocks: soft pastel tiles on paper */
+html[data-style="editorial"] .block::before { display: none; }
+html[data-style="editorial"] .block {
+  background: color-mix(in srgb, var(--c) 18%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--c) 45%, var(--line));
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 30%, var(--abyss)), 0 10px 18px -10px rgba(60, 45, 20, 0.35);
+}
+html[data-style="editorial"] .block strong { font-weight: 500; font-size: 19px; }
+html[data-style="editorial"] .block.foundation { box-shadow: 0 4px 0 var(--abyss); }
+html[data-style="editorial"] .tower-zone { background-color: var(--bg-2); }
+
+/* forms */
+html[data-style="editorial"] .field input, html[data-style="editorial"] .field textarea,
+html[data-style="editorial"] .field select, html[data-style="editorial"] .hd-new input,
+html[data-style="editorial"] .hd-new select { background: var(--surface); }

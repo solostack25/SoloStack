@@ -3,10 +3,12 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MODULES, PRESETS, moduleById } from "@/lib/modules";
-import { THEMES, getPrefs, setPrefs, type ThemeId } from "@/lib/prefs";
+import { getPrefs, setPrefs } from "@/lib/prefs";
+import { STYLES } from "@/lib/styles";
+import { switchStyle } from "@/lib/switchStyle";
 import { SITE } from "@/lib/site";
 import { chime, click, key } from "@/lib/sound";
-import { changeTheme, toggleSound } from "./NavControls";
+import { toggleSound } from "./NavControls";
 
 type Line = { text: string; kind: "cmd" | "out" | "err" | "ok" | "dim" | "banner" };
 
@@ -25,12 +27,12 @@ const BANNER = String.raw`
 `;
 
 const COMMANDS = [
-  "help", "ls", "stack", "open", "cd", "theme", "sound", "xray", "demo",
+  "help", "ls", "stack", "open", "cd", "style", "theme", "sound", "xray", "demo",
   "book", "whoami", "about", "neofetch", "history", "date", "echo", "clear", "exit", "sudo",
 ];
 
 const HELP: [string, string][] = [
-  ["ls modules", "every Nonprofit OS module (also: ls work, ls pages, ls themes)"],
+  ["ls modules", "every Nonprofit OS module (also: ls work, ls pages, ls styles)"],
   ["stack", "show your current stack"],
   ["stack add <id…>", "stack modules, e.g. stack add crm campaigns"],
   ["stack rm <id>", "pull a module out (Jenga rules apply)"],
@@ -38,7 +40,7 @@ const HELP: [string, string][] = [
   ["stack clear", "knock it all down"],
   ["open <page>", "home · stack · contact · helpdesk"],
   ["demo helpdesk", "play with the real helpdesk board"],
-  ["theme <name>", "teal · navy · emerald · ember"],
+  ["style <name>", "stack · editorial · glass · brutal · playful"],
   ["sound on|off", "synthesized UI sounds"],
   ["xray on|off", "see how this page is built"],
   ["book", "book a free consult"],
@@ -182,7 +184,8 @@ export default function Terminal() {
             out("  thefyi/          content site rebuilt around one donor path"),
             out("  txbyt/           data-viz publishing platform"),
           );
-        else if (what === "themes") res.push(...THEMES.map((t) => out(`  ${t.id.padEnd(10)} ${t.name}`)));
+        else if (what === "styles" || what === "themes")
+          res.push(...STYLES.map((t) => out(`  ${t.id.padEnd(11)} ${t.tagline}  — ${t.forWho}`)));
         else res.push(...Object.entries(PAGES).map(([k, v]) => out(`  ${k.padEnd(10)} ${v}`)));
         break;
       }
@@ -206,12 +209,13 @@ export default function Terminal() {
           res.push(out("→ loading the helpdesk playground. Drag a ticket to Done.", "ok"));
         } else res.push(out("demo: only `demo helpdesk` exists (for now)", "err"));
         break;
+      case "style":
       case "theme": {
-        const t = THEMES.find((x) => x.id === args[0]);
-        if (!t) res.push(out(`usage: theme <${THEMES.map((x) => x.id).join("|")}>`, "err"));
+        const t = STYLES.find((x) => x.id === args[0]);
+        if (!t) res.push(out(`usage: style <${STYLES.map((x) => x.id).join("|")}>`, "err"));
         else {
-          changeTheme(t.id as ThemeId);
-          res.push(out(`Theme → ${t.name}. Same code, new brand.`, "ok"));
+          void switchStyle(t.id);
+          res.push(out(`Style → ${t.name}. ${t.tagline} Same code, whole new look.`, "ok"));
         }
         break;
       }
@@ -251,7 +255,7 @@ export default function Terminal() {
           out("   ▣▣▣▣▣      Kernel: Next.js 16 / React 19"),
           out("              DB: Supabase (yours)"),
           out("              Shell: solostack-sh 1.0"),
-          out(`              Theme: ${getPrefs().theme}`),
+          out(`              Style: ${getPrefs().style}`),
           out("              Uptime: always on"),
         );
         break;
@@ -299,9 +303,9 @@ export default function Terminal() {
     else if (parts[0] === "stack" && parts.length === 2) pool = ["add", "rm", "preset", "clear"];
     else if (parts[0] === "stack" && parts[1] === "preset") pool = PRESETS.map((p) => p.id);
     else if (parts[0] === "stack") pool = MODULES.map((m) => m.id);
-    else if (parts[0] === "theme") pool = THEMES.map((t) => t.id);
+    else if (parts[0] === "style" || parts[0] === "theme") pool = STYLES.map((t) => t.id);
     else if (parts[0] === "open" || parts[0] === "cd") pool = Object.keys(PAGES);
-    else if (parts[0] === "ls") pool = ["modules", "work", "pages", "themes"];
+    else if (parts[0] === "ls") pool = ["modules", "work", "pages", "styles"];
     else if (["sound", "xray"].includes(parts[0])) pool = ["on", "off"];
     const hits = pool.filter((p) => p.startsWith(last));
     if (hits.length === 1) {

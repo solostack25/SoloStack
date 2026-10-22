@@ -1,9 +1,52 @@
 import type { Metadata, Viewport } from "next";
+
+// Self-hosted type for all five styles. @font-face is lazy: a family only downloads
+// when the active style (or a preview card) actually uses it.
+import "@fontsource/rajdhani/latin-500.css";
+import "@fontsource/rajdhani/latin-600.css";
+import "@fontsource/rajdhani/latin-700.css";
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/jetbrains-mono/latin-400.css";
+import "@fontsource/jetbrains-mono/latin-500.css";
+import "@fontsource/fraunces/latin-400.css";
+import "@fontsource/fraunces/latin-500.css";
+import "@fontsource/fraunces/latin-400-italic.css";
+import "@fontsource/fraunces/latin-500-italic.css";
+import "@fontsource/dm-sans/latin-400.css";
+import "@fontsource/dm-sans/latin-500.css";
+import "@fontsource/dm-sans/latin-600.css";
+import "@fontsource/sora/latin-600.css";
+import "@fontsource/sora/latin-700.css";
+import "@fontsource/plus-jakarta-sans/latin-400.css";
+import "@fontsource/plus-jakarta-sans/latin-500.css";
+import "@fontsource/plus-jakarta-sans/latin-600.css";
+import "@fontsource/plus-jakarta-sans/latin-700.css";
+import "@fontsource/archivo-black/latin-400.css";
+import "@fontsource/space-grotesk/latin-400.css";
+import "@fontsource/space-grotesk/latin-500.css";
+import "@fontsource/space-grotesk/latin-700.css";
+import "@fontsource/space-mono/latin-400.css";
+import "@fontsource/space-mono/latin-700.css";
+import "@fontsource/fredoka/latin-500.css";
+import "@fontsource/fredoka/latin-600.css";
+import "@fontsource/nunito/latin-400.css";
+import "@fontsource/nunito/latin-600.css";
+import "@fontsource/nunito/latin-700.css";
+import "@fontsource/nunito/latin-800.css";
+
 import "./globals.css";
+import "./styles/editorial.css";
+import "./styles/glass.css";
+import "./styles/brutal.css";
+import "./styles/playful.css";
+
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Terminal from "@/components/Terminal";
 import XrayHud from "@/components/XrayHud";
+import StyleToast from "@/components/StyleToast";
 import { SITE } from "@/lib/site";
 import { THEME_BOOT_SCRIPT } from "@/lib/themeBoot";
 
@@ -18,17 +61,10 @@ export const viewport: Viewport = { themeColor: "#070b0f" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="teal" suppressHydrationWarning>
+    <html lang="en" data-style="stack" suppressHydrationWarning>
       <head>
-        {/* apply the visitor's saved theme before first paint */}
+        {/* apply the visitor's saved style before first paint */}
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-        />
       </head>
       <body>
         <Nav />
@@ -36,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <Terminal />
         <XrayHud />
+        <StyleToast />
       </body>
     </html>
   );

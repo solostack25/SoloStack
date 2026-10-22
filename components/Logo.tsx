@@ -7,7 +7,7 @@ export default function Logo() {
         S
       </span>
       <span className="logo-word">
-        SOLO<span className="accent">//</span>STACK
+        Solo<span className="accent">//</span>Stack
       </span>
     </Link>
   );

@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container footer-grid">
         <div className="footer-col">
           <span className="logo-word" style={{ color: "var(--text)" }}>
-            SOLO<span className="accent">//</span>STACK
+            Solo<span className="accent">//</span>Stack
           </span>
           <span>Tech that actually shows up — for nonprofits, masjids and growing organizations.</span>
         </div>
@@ -32,7 +32,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container footer-base">
-        <span>© {new Date().getFullYear()} SOLOSTACK // BUILT ON NEXT.JS + VERCEL</span>
+        <span>© {new Date().getFullYear()} SoloStack · Built on Next.js + Vercel</span>
         <span>HOUSTON, TX</span>
       </div>
     </footer>

@@ -25,7 +25,7 @@ export default function StackPage() {
   return (
     <>
       <section className="container sb-hero">
-        <p className="eyebrow">// Nonprofit OS · {MODULES.length} modules · 1 foundation</p>
+        <p className="eyebrow">Nonprofit OS · {MODULES.length} modules · 1 foundation</p>
         <h1 className="h1">
           Build your <span>stack.</span>
         </h1>
